@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://127.0.0.1:9000/soap" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://127.0.0.1:9000/soap">
+<types>
+<xsd:schema targetNamespace="http://127.0.0.1:9000/soap"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="authInfo">
+  <xsd:all>
+   <xsd:element name="username" type="xsd:string"/>
+   <xsd:element name="password" type="xsd:string"/>
+   <xsd:element name="appKey" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="stidList">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:stid[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="ctidList">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ctid[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Talkgroup">
+  <xsd:all>
+   <xsd:element name="tgId" type="xsd:int"/>
+   <xsd:element name="tgDec" type="xsd:int"/>
+   <xsd:element name="tgSubfleet" type="xsd:string"/>
+   <xsd:element name="tgLtr" type="xsd:boolean"/>
+   <xsd:element name="tgDescr" type="xsd:string"/>
+   <xsd:element name="tgAlpha" type="xsd:string"/>
+   <xsd:element name="tgMode" type="xsd:string"/>
+   <xsd:element name="tags" type="tns:tags"/>
+   <xsd:element name="tgCid" type="xsd:int"/>
+   <xsd:element name="tgSort" type="xsd:int"/>
+   <xsd:element name="tgDate" type="xsd:dateTime"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Talkgroups">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Talkgroup[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="TalkgroupCat">
+  <xsd:all>
+   <xsd:element name="tgCid" type="xsd:int" documentation="Test Doco"/>
+   <xsd:element name="sid" type="xsd:int"/>
+   <xsd:element name="tgCname" type="xsd:string"/>
+   <xsd:element name="tgSort" type="xsd:int"/>
+   <xsd:element name="tgSortBy" type="xsd:int"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="range" type="xsd:decimal"/>
+   <xsd:element name="lastUpdated" type="xsd:dateTime"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TalkgroupCats">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TalkgroupCat[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSite">
+  <xsd:all>
+   <xsd:element name="siteId" type="xsd:int"/>
+   <xsd:element name="sid" type="xsd:int"/>
+   <xsd:element name="siteNumber" type="xsd:int"/>
+   <xsd:element name="siteDescr" type="xsd:string"/>
+   <xsd:element name="siteNeighbors" type="xsd:string"/>
+   <xsd:element name="siteLocation" type="xsd:string"/>
+   <xsd:element name="siteCtid" type="xsd:int"/>
+   <xsd:element name="siteCt" type="xsd:string"/>
+   <xsd:element name="siteModulation" type="xsd:string"/>
+   <xsd:element name="siteNotes" type="xsd:string"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="range" type="xsd:decimal"/>
+   <xsd:element name="siteLicenses" type="tns:TrsSiteLicenses"/>
+   <xsd:element name="siteFeqs" type="tns:TrsSiteFreqs"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSites">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TrsSite[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSiteFreq">
+  <xsd:all>
+   <xsd:element name="lcn" type="xsd:int"/>
+   <xsd:element name="freq" type="xsd:decimal"/>
+   <xsd:element name="use" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSiteFreqs">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TrsSiteFreq[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSiteLicense">
+  <xsd:all>
+   <xsd:element name="license" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSiteLicenses">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TrsSiteLicense[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Trs">
+  <xsd:all>
+   <xsd:element name="sName" type="xsd:string"/>
+   <xsd:element name="sType" type="xsd:int"/>
+   <xsd:element name="sFlavor" type="xsd:int"/>
+   <xsd:element name="sVoice" type="xsd:int"/>
+   <xsd:element name="sCity" type="xsd:string"/>
+   <xsd:element name="sCounty" type="tns:ctids"/>
+   <xsd:element name="sState" type="tns:stids"/>
+   <xsd:element name="sCountry" type="xsd:string"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="range" type="xsd:decimal"/>
+   <xsd:element name="lastUpdated" type="xsd:dateTime"/>
+   <xsd:element name="sysid" type="tns:TrsSysid"/>
+   <xsd:element name="bandplan" type="tns:TrsBrandplan"/>
+   <xsd:element name="fleetmap" type="tns:TrsFleetmap"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsListDef">
+  <xsd:all>
+   <xsd:element name="sid" type="xsd:int"/>
+   <xsd:element name="sName" type="xsd:string"/>
+   <xsd:element name="sType" type="xsd:int"/>
+   <xsd:element name="sFlavor" type="xsd:int"/>
+   <xsd:element name="sVoice" type="xsd:int"/>
+   <xsd:element name="sCity" type="xsd:string"/>
+   <xsd:element name="lastUpdated" type="xsd:dateTime"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsList">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:TrsListDef[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="trsSysidDef">
+  <xsd:all>
+   <xsd:element name="sysid" type="xsd:string"/>
+   <xsd:element name="ct" type="xsd:string"/>
+   <xsd:element name="wacn" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsSysid">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:trsSysidDef[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="trsBandplanDef">
+  <xsd:all>
+   <xsd:element name="base" type="xsd:string"/>
+   <xsd:element name="spacing" type="xsd:string"/>
+   <xsd:element name="offset" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsBrandplan">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:trsBandplanDef[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="TrsFleetmap">
+  <xsd:all>
+   <xsd:element name="b0" type="xsd:string"/>
+   <xsd:element name="b1" type="xsd:string"/>
+   <xsd:element name="b2" type="xsd:string"/>
+   <xsd:element name="b3" type="xsd:string"/>
+   <xsd:element name="b4" type="xsd:string"/>
+   <xsd:element name="b5" type="xsd:string"/>
+   <xsd:element name="b6" type="xsd:string"/>
+   <xsd:element name="b7" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="trsTypeDef">
+  <xsd:all>
+   <xsd:element name="sType" type="xsd:int"/>
+   <xsd:element name="sTypeDescr" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsType">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:trsTypeDef[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="trsFlavorDef">
+  <xsd:all>
+   <xsd:element name="sType" type="xsd:int"/>
+   <xsd:element name="sFlavor" type="xsd:int"/>
+   <xsd:element name="sFlavorDescr" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsFlavor">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:trsFlavorDef[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="trsVoiceDef">
+  <xsd:all>
+   <xsd:element name="sType" type="xsd:int"/>
+   <xsd:element name="sVoice" type="xsd:int"/>
+   <xsd:element name="sVoiceDescr" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TrsVoice">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:trsVoiceDef[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="freq">
+  <xsd:all>
+   <xsd:element name="fid" type="xsd:int"/>
+   <xsd:element name="out" type="xsd:decimal"/>
+   <xsd:element name="in" type="xsd:decimal"/>
+   <xsd:element name="callsign" type="xsd:string"/>
+   <xsd:element name="descr" type="xsd:string"/>
+   <xsd:element name="alpha" type="xsd:string"/>
+   <xsd:element name="tone" type="xsd:string"/>
+   <xsd:element name="mode" type="xsd:string"/>
+   <xsd:element name="class" type="xsd:string"/>
+   <xsd:element name="tags" type="tns:tags"/>
+   <xsd:element name="scid" type="xsd:int"/>
+   <xsd:element name="sort" type="xsd:int"/>
+   <xsd:element name="lastUpdated" type="xsd:dateTime"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="searchFreqResult">
+  <xsd:all>
+   <xsd:element name="out" type="xsd:decimal"/>
+   <xsd:element name="in" type="xsd:decimal"/>
+   <xsd:element name="callsign" type="xsd:string"/>
+   <xsd:element name="descr" type="xsd:string"/>
+   <xsd:element name="alpha" type="xsd:string"/>
+   <xsd:element name="tone" type="xsd:string"/>
+   <xsd:element name="mode" type="xsd:string"/>
+   <xsd:element name="class" type="xsd:string"/>
+   <xsd:element name="tags" type="tns:tags"/>
+   <xsd:element name="scid" type="xsd:int"/>
+   <xsd:element name="sid" type="xsd:int"/>
+   <xsd:element name="aid" type="xsd:int"/>
+   <xsd:element name="ctid" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="searchFreqResults">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:searchFreqResult[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Freqs">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:freq[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Cats">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:cat[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="cat">
+  <xsd:all>
+   <xsd:element name="cid" type="xsd:int"/>
+   <xsd:element name="cName" type="xsd:string"/>
+   <xsd:element name="subcats" type="tns:SubCats"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="SubCats">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:subcat[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="subcat">
+  <xsd:all>
+   <xsd:element name="scid" type="xsd:int"/>
+   <xsd:element name="scName" type="xsd:string"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="range" type="xsd:decimal"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="AgencyInfo">
+  <xsd:all>
+   <xsd:element name="aid" type="xsd:int"/>
+   <xsd:element name="agencyName" type="xsd:string" agencyName="agencyName"/>
+   <xsd:element name="agencyType" type="xsd:string" agencyType="agencyName"/>
+   <xsd:element name="ctid" type="xsd:int"/>
+   <xsd:element name="stid" type="xsd:int"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="range" type="xsd:decimal"/>
+   <xsd:element name="lastUpdated" type="xsd:dateTime"/>
+   <xsd:element name="cats" type="tns:Cats"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="CountyInfo">
+  <xsd:all>
+   <xsd:element name="ctid" type="xsd:int"/>
+   <xsd:element name="countyName" type="xsd:string"/>
+   <xsd:element name="countyHeader" type="xsd:string"/>
+   <xsd:element name="stid" type="xsd:int"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="range" type="xsd:decimal"/>
+   <xsd:element name="lastUpdated" type="xsd:dateTime"/>
+   <xsd:element name="cats" type="tns:Cats"/>
+   <xsd:element name="trsList" type="tns:TrsList"/>
+   <xsd:element name="agencyList" type="tns:Agencies"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="StateInfo">
+  <xsd:all>
+   <xsd:element name="stid" type="xsd:int"/>
+   <xsd:element name="stateName" type="xsd:string"/>
+   <xsd:element name="stateEntityType" type="xsd:string"/>
+   <xsd:element name="trsList" type="tns:TrsList"/>
+   <xsd:element name="agencyList" type="tns:Agencies"/>
+   <xsd:element name="countyList" type="tns:Counties"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="County">
+  <xsd:all>
+   <xsd:element name="ctid" type="xsd:int"/>
+   <xsd:element name="countyName" type="xsd:string"/>
+   <xsd:element name="countyHeader" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Counties">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:County[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="ctids">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:ctid[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="ctid">
+  <xsd:all>
+   <xsd:element name="ctid" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="States">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:State[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="State">
+  <xsd:all>
+   <xsd:element name="stid" type="xsd:int"/>
+   <xsd:element name="stateName" type="xsd:string"/>
+   <xsd:element name="stateCode" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Metros">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Metro[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Metro">
+  <xsd:all>
+   <xsd:element name="mid" type="xsd:int"/>
+   <xsd:element name="metroName" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Countries">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Country[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Country">
+  <xsd:all>
+   <xsd:element name="coid" type="xsd:int"/>
+   <xsd:element name="countryName" type="xsd:string"/>
+   <xsd:element name="countryCode" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Agencies">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Agency[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Agency">
+  <xsd:all>
+   <xsd:element name="aid" type="xsd:int"/>
+   <xsd:element name="aName" type="xsd:string"/>
+   <xsd:element name="aType" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="stids">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:stid[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="stid">
+  <xsd:all>
+   <xsd:element name="stid" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="tags">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:tag[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="tag">
+  <xsd:all>
+   <xsd:element name="tagId" type="xsd:int"/>
+   <xsd:element name="tagDescr" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="modes">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:mode[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="mode">
+  <xsd:all>
+   <xsd:element name="mode" type="xsd:int"/>
+   <xsd:element name="modeName" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="ZipInfo">
+  <xsd:all>
+   <xsd:element name="zipCode" type="xsd:int"/>
+   <xsd:element name="lat" type="xsd:string"/>
+   <xsd:element name="lon" type="xsd:string"/>
+   <xsd:element name="city" type="xsd:string"/>
+   <xsd:element name="stid" type="xsd:int"/>
+   <xsd:element name="ctid" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="UserInfo">
+  <xsd:all>
+   <xsd:element name="username" type="xsd:string"/>
+   <xsd:element name="subExpireDate" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="fccCallsignDetails">
+  <xsd:all>
+   <xsd:element name="licensee" type="xsd:string"/>
+   <xsd:element name="callsign" type="xsd:string"/>
+   <xsd:element name="status" type="xsd:string"/>
+   <xsd:element name="grantDate" type="xsd:string"/>
+   <xsd:element name="radioService" type="xsd:string"/>
+   <xsd:element name="notes" type="xsd:string"/>
+   <xsd:element name="locations" type="tns:fccLocations"/>
+   <xsd:element name="frequencies" type="tns:fccFrequencies"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="fccFrequency">
+  <xsd:all>
+   <xsd:element name="locationNumber" type="xsd:int"/>
+   <xsd:element name="frequency" type="xsd:decimal"/>
+   <xsd:element name="emission" type="xsd:string"/>
+   <xsd:element name="class" type="xsd:string"/>
+   <xsd:element name="power" type="xsd:int"/>
+   <xsd:element name="mobiles" type="xsd:int"/>
+   <xsd:element name="pagers" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="fccFrequencies">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:fccFrequency[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="fccLocation">
+  <xsd:all>
+   <xsd:element name="locationNumber" type="xsd:int"/>
+   <xsd:element name="towerId" type="xsd:int"/>
+   <xsd:element name="type" type="xsd:string"/>
+   <xsd:element name="antennaHeight" type="xsd:int"/>
+   <xsd:element name="structureHeight" type="xsd:int"/>
+   <xsd:element name="elevation" type="xsd:int"/>
+   <xsd:element name="address" type="xsd:string"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="city" type="xsd:string"/>
+   <xsd:element name="county" type="xsd:string"/>
+   <xsd:element name="state" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="fccLocations">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:fccLocation[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="proxCallsignResult">
+  <xsd:all>
+   <xsd:element name="callsign" type="xsd:string"/>
+   <xsd:element name="licensee" type="xsd:string"/>
+   <xsd:element name="lat" type="xsd:decimal"/>
+   <xsd:element name="lon" type="xsd:decimal"/>
+   <xsd:element name="distance" type="xsd:decimal"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="proxCallsignResults">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:proxCallsignResult[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="fccRadioServiceCode">
+  <xsd:all>
+   <xsd:element name="code" type="xsd:string"/>
+   <xsd:element name="description" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="fccRadioServiceCodes">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:fccRadioServiceCode[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="getTrsTalkgroupsRequest">
+  <part name="sid" type="xsd:int" />
+  <part name="tgCid" type="xsd:int" />
+  <part name="tgTag" type="xsd:int" />
+  <part name="tgDec" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getTrsTalkgroupsResponse">
+  <part name="return" type="tns:Talkgroups" /></message>
+<message name="getTrsTalkgroupCatsRequest">
+  <part name="sid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getTrsTalkgroupCatsResponse">
+  <part name="return" type="tns:TalkgroupCats" /></message>
+<message name="getTrsDetailsRequest">
+  <part name="sid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getTrsDetailsResponse">
+  <part name="return" type="tns:Trs" /></message>
+<message name="getTrsBySysidRequest">
+  <part name="sysid" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getTrsBySysidResponse">
+  <part name="return" type="tns:TrsList" /></message>
+<message name="getTrsSitesRequest">
+  <part name="sid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getTrsSitesResponse">
+  <part name="return" type="tns:TrsSites" /></message>
+<message name="getStatesByListRequest">
+  <part name="request" type="tns:stidList" /></message>
+<message name="getStatesByListResponse">
+  <part name="return" type="tns:States" /></message>
+<message name="getCountiesByListRequest">
+  <part name="request" type="tns:ctidList" /></message>
+<message name="getCountiesByListResponse">
+  <part name="return" type="tns:Counties" /></message>
+<message name="getTagRequest">
+  <part name="id" type="xsd:int" /></message>
+<message name="getTagResponse">
+  <part name="return" type="tns:tags" /></message>
+<message name="getModeRequest">
+  <part name="mode" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getModeResponse">
+  <part name="return" type="tns:modes" /></message>
+<message name="getTrsTypeRequest">
+  <part name="id" type="xsd:int" /></message>
+<message name="getTrsTypeResponse">
+  <part name="return" type="tns:TrsType" /></message>
+<message name="getTrsFlavorRequest">
+  <part name="id" type="xsd:int" /></message>
+<message name="getTrsFlavorResponse">
+  <part name="return" type="tns:TrsFlavor" /></message>
+<message name="getTrsVoiceRequest">
+  <part name="id" type="xsd:int" /></message>
+<message name="getTrsVoiceResponse">
+  <part name="return" type="tns:TrsVoice" /></message>
+<message name="getCountryListRequest"></message>
+<message name="getCountryListResponse">
+  <part name="return" type="tns:Countries" /></message>
+<message name="getCountryInfoRequest">
+  <part name="coid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getCountryInfoResponse">
+  <part name="return" type="tns:States" /></message>
+<message name="getStateInfoRequest">
+  <part name="stid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getStateInfoResponse">
+  <part name="return" type="tns:StateInfo" /></message>
+<message name="getCountyInfoRequest">
+  <part name="ctid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getCountyInfoResponse">
+  <part name="return" type="tns:CountyInfo" /></message>
+<message name="getAgencyInfoRequest">
+  <part name="aid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getAgencyInfoResponse">
+  <part name="return" type="tns:AgencyInfo" /></message>
+<message name="getSubcatFreqsRequest">
+  <part name="scid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getSubcatFreqsResponse">
+  <part name="return" type="tns:Freqs" /></message>
+<message name="searchCountyFreqRequest">
+  <part name="ctid" type="xsd:int" />
+  <part name="freq" type="xsd:decimal" />
+  <part name="tone" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="searchCountyFreqResponse">
+  <part name="return" type="tns:searchFreqResults" /></message>
+<message name="searchStateFreqRequest">
+  <part name="stid" type="xsd:int" />
+  <part name="freq" type="xsd:decimal" />
+  <part name="tone" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="searchStateFreqResponse">
+  <part name="return" type="tns:searchFreqResults" /></message>
+<message name="searchMetroFreqRequest">
+  <part name="mid" type="xsd:int" />
+  <part name="freq" type="xsd:decimal" />
+  <part name="tone" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="searchMetroFreqResponse">
+  <part name="return" type="tns:searchFreqResults" /></message>
+<message name="getCountyFreqsByTagRequest">
+  <part name="ctid" type="xsd:int" />
+  <part name="tag" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getCountyFreqsByTagResponse">
+  <part name="return" type="tns:Freqs" /></message>
+<message name="getAgencyFreqsByTagRequest">
+  <part name="aid" type="xsd:int" />
+  <part name="tag" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getAgencyFreqsByTagResponse">
+  <part name="return" type="tns:Freqs" /></message>
+<message name="getMetroAreaRequest">
+  <part name="mid" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getMetroAreaResponse">
+  <part name="return" type="tns:Metros" /></message>
+<message name="getZipcodeInfoRequest">
+  <part name="zipcode" type="xsd:int" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getZipcodeInfoResponse">
+  <part name="return" type="tns:ZipInfo" /></message>
+<message name="fccGetCallsignRequest">
+  <part name="callsign" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="fccGetCallsignResponse">
+  <part name="return" type="tns:fccCallsignDetails" /></message>
+<message name="fccGetRadioServiceCodeRequest">
+  <part name="code" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="fccGetRadioServiceCodeResponse">
+  <part name="return" type="tns:fccRadioServiceCodes" /></message>
+<message name="fccGetProxCallsignsRequest">
+  <part name="lat" type="xsd:decimal" />
+  <part name="lon" type="xsd:decimal" />
+  <part name="range" type="xsd:decimal" />
+  <part name="unit" type="xsd:string" />
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="fccGetProxCallsignsResponse">
+  <part name="return" type="tns:proxCallsignResults" /></message>
+<message name="getUserDataRequest">
+  <part name="authInfo" type="tns:authInfo" /></message>
+<message name="getUserDataResponse">
+  <part name="return" type="tns:UserInfo" /></message>
+<portType name="RRWsdlPortType">
+  <operation name="getTrsTalkgroups">
+    <documentation>Gets talkgroups for a trunked system by talkgroup category ID.  If no category ID is specified, all talkgroups for the system are returned.  Two optional filters are available.  One by talkgroup tagId is available to return only talkgroups that have a specified tag assigned to them, and one by tgDec for return a list of talkgroups with a specific decimal ID.  You can mix optional filters for the desired result.</documentation>
+    <input message="tns:getTrsTalkgroupsRequest"/>
+    <output message="tns:getTrsTalkgroupsResponse"/>
+  </operation>
+  <operation name="getTrsTalkgroupCats">
+    <documentation>Get all talkgroups categories for a trunked system</documentation>
+    <input message="tns:getTrsTalkgroupCatsRequest"/>
+    <output message="tns:getTrsTalkgroupCatsResponse"/>
+  </operation>
+  <operation name="getTrsDetails">
+    <documentation>Get details on a trunked system</documentation>
+    <input message="tns:getTrsDetailsRequest"/>
+    <output message="tns:getTrsDetailsResponse"/>
+  </operation>
+  <operation name="getTrsBySysid">
+    <documentation>Get a list trunked systems with a specific system ID (Project 25 or Motorola)</documentation>
+    <input message="tns:getTrsBySysidRequest"/>
+    <output message="tns:getTrsBySysidResponse"/>
+  </operation>
+  <operation name="getTrsSites">
+    <documentation>Get details on all sites for a trunked system.</documentation>
+    <input message="tns:getTrsSitesRequest"/>
+    <output message="tns:getTrsSitesResponse"/>
+  </operation>
+  <operation name="getStatesByList">
+    <documentation>Return details on a list of states submitted to the service as an array of stids</documentation>
+    <input message="tns:getStatesByListRequest"/>
+    <output message="tns:getStatesByListResponse"/>
+  </operation>
+  <operation name="getCountiesByList">
+    <documentation>Return details on a list of counties submitted to the service as an array of ctids</documentation>
+    <input message="tns:getCountiesByListRequest"/>
+    <output message="tns:getCountiesByListResponse"/>
+  </operation>
+  <operation name="getTag">
+    <documentation>Return details on a single tag.  If no tag ID is specified returns all frequency and talkgroup tag definitions and their values</documentation>
+    <input message="tns:getTagRequest"/>
+    <output message="tns:getTagResponse"/>
+  </operation>
+  <operation name="getMode">
+    <documentation>Return details on a single mode.  If no mode definition is specified function returns all conventional mode definitions</documentation>
+    <input message="tns:getModeRequest"/>
+    <output message="tns:getModeResponse"/>
+  </operation>
+  <operation name="getTrsType">
+    <documentation>Returns a trunked system type description based on type ID.  If no type ID is specified all TRS types will be returned</documentation>
+    <input message="tns:getTrsTypeRequest"/>
+    <output message="tns:getTrsTypeResponse"/>
+  </operation>
+  <operation name="getTrsFlavor">
+    <documentation>Returns a trunked system flavor description based on flavor ID.  If no flavor ID is specified all TRS flavors will be returned</documentation>
+    <input message="tns:getTrsFlavorRequest"/>
+    <output message="tns:getTrsFlavorResponse"/>
+  </operation>
+  <operation name="getTrsVoice">
+    <documentation>Returns a trunked system voice description based on voice ID.  If no voice ID is specified all TRS voice types will be returned</documentation>
+    <input message="tns:getTrsVoiceRequest"/>
+    <output message="tns:getTrsVoiceResponse"/>
+  </operation>
+  <operation name="getCountryList">
+    <documentation>Returns the list of countries</documentation>
+    <input message="tns:getCountryListRequest"/>
+    <output message="tns:getCountryListResponse"/>
+  </operation>
+  <operation name="getCountryInfo">
+    <documentation>Returns assigned state/province/region type entities assigned to a country</documentation>
+    <input message="tns:getCountryInfoRequest"/>
+    <output message="tns:getCountryInfoResponse"/>
+  </operation>
+  <operation name="getStateInfo">
+    <documentation>Returns assigned county IDs, agency IDs, and Statewide Trunked Systems references for a State</documentation>
+    <input message="tns:getStateInfoRequest"/>
+    <output message="tns:getStateInfoResponse"/>
+  </operation>
+  <operation name="getCountyInfo">
+    <documentation>Returns assigned frequency categories, subcategories, agencies, and trunked systems for a specified county ID</documentation>
+    <input message="tns:getCountyInfoRequest"/>
+    <output message="tns:getCountyInfoResponse"/>
+  </operation>
+  <operation name="getAgencyInfo">
+    <documentation>Returns assigned frequency categories, subcategories, and trunked systems for a specified agency ID</documentation>
+    <input message="tns:getAgencyInfoRequest"/>
+    <output message="tns:getAgencyInfoResponse"/>
+  </operation>
+  <operation name="getSubcatFreqs">
+    <documentation>Returns an array of frequencies for a specified sub-category ID</documentation>
+    <input message="tns:getSubcatFreqsRequest"/>
+    <output message="tns:getSubcatFreqsResponse"/>
+  </operation>
+  <operation name="searchCountyFreq">
+    <documentation>Searches for an idenfied frequency (conventional or trunked) in a specific county.  An option filter by tone, if specified, will limit results to conventional frequencies with that tone.</documentation>
+    <input message="tns:searchCountyFreqRequest"/>
+    <output message="tns:searchCountyFreqResponse"/>
+  </operation>
+  <operation name="searchStateFreq">
+    <documentation>Searches for an idenfied frequency (conventional or trunked) in a specific state. An option filter by tone, if specified, will limit results to conventional frequencies with that tone.</documentation>
+    <input message="tns:searchStateFreqRequest"/>
+    <output message="tns:searchStateFreqResponse"/>
+  </operation>
+  <operation name="searchMetroFreq">
+    <documentation>Searches for an idenfied frequency (conventional or trunked) in a specific metro area (collection of counties identified by mid).  An option filter by tone, if specified, will limit results to conventional frequencies with that tone.</documentation>
+    <input message="tns:searchMetroFreqRequest"/>
+    <output message="tns:searchMetroFreqResponse"/>
+  </operation>
+  <operation name="getCountyFreqsByTag">
+    <documentation>Returns all frequencies with a specific tag in a County</documentation>
+    <input message="tns:getCountyFreqsByTagRequest"/>
+    <output message="tns:getCountyFreqsByTagResponse"/>
+  </operation>
+  <operation name="getAgencyFreqsByTag">
+    <documentation>Returns all frequencies with a specific tag for an Agency</documentation>
+    <input message="tns:getAgencyFreqsByTagRequest"/>
+    <output message="tns:getAgencyFreqsByTagResponse"/>
+  </operation>
+  <operation name="getMetroArea">
+    <documentation>Returns details on a Metro Area by mid.  If no mid is specified, all metro areas are returned.</documentation>
+    <input message="tns:getMetroAreaRequest"/>
+    <output message="tns:getMetroAreaResponse"/>
+  </operation>
+  <operation name="getZipcodeInfo">
+    <documentation>Return details on a United States ZIP Postal Code</documentation>
+    <input message="tns:getZipcodeInfoRequest"/>
+    <output message="tns:getZipcodeInfoResponse"/>
+  </operation>
+  <operation name="fccGetCallsign">
+    <documentation>Return details on an FCC callsign, including locations and frequencies</documentation>
+    <input message="tns:fccGetCallsignRequest"/>
+    <output message="tns:fccGetCallsignResponse"/>
+  </operation>
+  <operation name="fccGetRadioServiceCode">
+    <documentation>Return details on an FCC radio service code.  If no code is specified, all FCC Radio Service Codes are returned</documentation>
+    <input message="tns:fccGetRadioServiceCodeRequest"/>
+    <output message="tns:fccGetRadioServiceCodeResponse"/>
+  </operation>
+  <operation name="fccGetProxCallsigns">
+    <documentation>Return FCC Callsigns within the proximity of a centerpoint. Centerpoint is expressed in decimal Lat and Lon.  Range is in decimal, and range unit specification is: m=miles, k=kilometers, n=nautical miles.  Please keep searches to under 3 miles (or equivalent), otherwise database SOAP interface timeouts might occur.</documentation>
+    <input message="tns:fccGetProxCallsignsRequest"/>
+    <output message="tns:fccGetProxCallsignsResponse"/>
+  </operation>
+  <operation name="getUserData">
+    <documentation>Return details on the authenticated user</documentation>
+    <input message="tns:getUserDataRequest"/>
+    <output message="tns:getUserDataResponse"/>
+  </operation>
+</portType>
+<binding name="RRWsdlBinding" type="tns:RRWsdlPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="getTrsTalkgroups">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsTalkgroups" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsTalkgroupCats">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsTalkgroupCats" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsDetails">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsDetails" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsBySysid">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsBySysid" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsSites">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsSites" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getStatesByList">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getStatesByList" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getCountiesByList">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getCountiesByList" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTag">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTag" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getMode">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getMode" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsType">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsType" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsFlavor">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsFlavor" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getTrsVoice">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getTrsVoice" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getCountryList">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getCountryList" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getCountryInfo">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getCountryInfo" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getStateInfo">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getStateInfo" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getCountyInfo">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getCountyInfo" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getAgencyInfo">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getAgencyInfo" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getSubcatFreqs">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getSubcatFreqs" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="searchCountyFreq">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#searchCountyFreq" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="searchStateFreq">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#searchStateFreq" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="searchMetroFreq">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#searchMetroFreq" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getCountyFreqsByTag">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getCountyFreqsByTag" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getAgencyFreqsByTag">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getAgencyFreqsByTag" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getMetroArea">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getMetroArea" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getZipcodeInfo">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getZipcodeInfo" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="fccGetCallsign">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#fccGetCallsign" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="fccGetRadioServiceCode">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#fccGetRadioServiceCode" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="fccGetProxCallsigns">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#fccGetProxCallsigns" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="getUserData">
+    <soap:operation soapAction="http://127.0.0.1:9000/soap#getUserData" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://127.0.0.1:9000/soap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="RRWsdl">
+  <port name="RRWsdlPort" binding="tns:RRWsdlBinding">
+    <soap:address location="http://127.0.0.1:9000/soap/index.php"/>
+  </port>
+</service>
+</definitions>

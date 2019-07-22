@@ -1,0 +1,192 @@
+                                     <!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>[GRP] Group 1 - Google Maps provided by FreeSCAN</title>
+
+    <style type="text/css">
+      #map-canvas {
+        height: 500px;
+      }
+    </style>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi?autoload={'modules':[{name:'maps',version:3,other_params:'sensor=false'}]}"></script>
+    <script type="text/javascript">
+            function DistanceWidget(map) {
+        this.set('map', map);
+        this.set('position', map.getCenter());
+
+
+    var marker1 = new google.maps.Marker({
+          draggable: false,
+          title: 'System2',
+          position:  new google.maps.LatLng(43.153222, -79.183186)
+        });
+          marker1.bindTo('map', this);
+
+    var circle1 = new google.maps.Circle({
+          strokeWeight: 1,
+          center:new google.maps.LatLng(43.153222, -79.183186),
+          radius:10000,
+          strokeColor:"#06F400",
+          fillColor:"#06F200",
+          map:map
+        });
+
+          var marker3 = new google.maps.Marker({
+          draggable: false,
+          title: 'System2',
+          position:  new google.maps.LatLng(43.003222, -79.183186)
+        });
+          marker3.bindTo('map', this);
+
+    var circle2 = new google.maps.Circle({
+          strokeWeight: 2,
+          center:new google.maps.LatLng(43.003222, -79.183186),
+          radius:10000,
+          map:map
+        });
+
+
+
+
+  var marker = new google.maps.Marker({
+          draggable: false,
+          title: 'System1',
+          position:  new google.maps.LatLng(43.653222, -79.383186)
+        });
+        marker.bindTo('map', this);
+
+
+
+
+
+        var radiusWidget = new RadiusWidget();
+
+        radiusWidget.bindTo('map', this);
+
+        radiusWidget.bindTo('center', this, 'position');
+
+        this.bindTo('distance', radiusWidget);
+
+        this.bindTo('bounds', radiusWidget);
+        
+
+      }
+      DistanceWidget.prototype = new google.maps.MVCObject();
+
+
+            function RadiusWidget() {
+        var circle = new google.maps.Circle({
+          strokeWeight: 2
+        });
+
+        this.set('distance', 26.0);
+
+        this.bindTo('bounds', circle);
+
+        circle.bindTo('center', this);
+
+        circle.bindTo('map', this);
+
+        circle.bindTo('radius', this);
+
+        this.addSizer_();
+      }
+      RadiusWidget.prototype = new google.maps.MVCObject();
+
+
+            RadiusWidget.prototype.distance_changed = function() {
+        this.set('radius', this.get('distance') * 1000);
+      };
+
+
+
+      RadiusWidget.prototype.addSizer_ = function() {
+        var sizer = new google.maps.Marker({
+      draggable: false,
+          visible: false
+        });
+
+        sizer.bindTo('map', this);
+        sizer.bindTo('position', this, 'sizer_position');
+
+        var me = this;
+        google.maps.event.addListener(sizer, 'drag', function() {
+          me.setDistance();
+        });
+      };
+
+
+
+            RadiusWidget.prototype.center_changed = function() {
+        var bounds = this.get('bounds');
+
+        if (bounds) {
+          var lng = bounds.getNorthEast().lng();
+
+          var position = new google.maps.LatLng(this.get('center').lat(), lng);
+          this.set('sizer_position', position);
+        }
+      };
+
+
+            RadiusWidget.prototype.distanceBetweenPoints_ = function(p1, p2) {
+        if (!p1 || !p2) {
+          return 0;
+        }
+
+        var R = 6371;
+        var dLat = (p2.lat() - p1.lat()) * Math.PI / 180;
+        var dLon = (p2.lng() - p1.lng()) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(p1.lat() * Math.PI / 180) * Math.cos(p2.lat() * Math.PI / 180) *
+          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d;
+      };
+
+
+            RadiusWidget.prototype.setDistance = function() {
+        var pos = this.get('sizer_position');
+        var center = this.get('center');
+        var distance = this.distanceBetweenPoints_(center, pos);
+
+        this.set('distance', distance);
+      };
+
+
+      function init() {
+        var mapDiv = document.getElementById('map-canvas');
+        var map = new google.maps.Map(mapDiv, {
+          center: new google.maps.LatLng(43.653222, -79.383186),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+        var distanceWidget = new DistanceWidget(map);
+
+        google.maps.event.addListener(distanceWidget, 'distance_changed', function() {
+          displayInfo(distanceWidget);
+        });
+
+        google.maps.event.addListener(distanceWidget, 'position_changed', function() {
+          displayInfo(distanceWidget);
+        });
+      }
+
+      function displayInfo(widget) {
+        var info = document.getElementById('info');
+        info.innerHTML = 'Position: ' + widget.get('position') + ', distance: ' +
+          widget.get('distance');
+      }
+
+      google.maps.event.addDomListener(window, 'load', init);
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+    <div id="info"></div>
+  </body>
+</html>
+
